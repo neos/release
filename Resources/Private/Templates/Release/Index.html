@@ -1,5 +1,6 @@
-<f:layout name="Default" />
+{namespace typo3=TYPO3\TYPO3\ViewHelpers}
 
+<f:layout name="Default" />
 <f:section name="Title">Release Overview</f:section>
 
 <f:section name="Content">
@@ -41,7 +42,7 @@
 								</tr>
 								<tr class="tr-odd">
 									<td rowspan="1"><strong>Release Notes</strong></td>
-									<td rowspan="1"><a href="/download/release-notes/typo3-4-5-release-notes/">Release notes</a></td>
+									<td rowspan="1"><typo3:link.node node="{item.node}">Release Notes</typo3:link.node></td>
 								</tr>
 								<tr class="tr-even">
 									<td><strong>Installation</strong></td>
@@ -55,22 +56,18 @@
 								</tbody>
 							</table>
 							<h4>{branch.label} Downloads</h4>
-							<f:if condition="{branch.releases}">
+							<f:if condition="{branch.latestRelease}">
 								<f:then>
 									<table class="featured">
 										<tbody>
-										<f:for each="{branch.downloads}" as="download">
+										<f:for each="{branch.latestRelease.downloads}" as="download">
 										<tr class="tr-even">
 											<td>{download.label}</td>
-											<td><f:for each="{download.variants}" as="variant"><a href="{variant.url}" target="_blank" class="bu">[{variant.format}]</a>&nbsp;</f:for></td>
+											<td><f:for each="{download.formats}" as="format"><a href="{format.url}" target="_blank" class="bu">[{format.fileExtension}]</a>&nbsp;</f:for></td>
 										</tr>
 										</f:for>
 										</tbody>
 									</table>
-									<ul>
-									<f:for each="{branch.releases}" as="release">
-									</f:for>
-									</ul>
 								</f:then>
 								<f:else>
 									<p>There are no downloads available for this release yet.</p>

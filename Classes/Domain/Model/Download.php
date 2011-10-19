@@ -7,9 +7,10 @@ namespace TYPO3\Release\Domain\Model;
  *                                                                        */
 
 use TYPO3\FLOW3\Annotations as FLOW3;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * A Download
+ * A download format
  *
  * @FLOW3\Scope("prototype")
  * @FLOW3\Entity
@@ -17,78 +18,59 @@ use TYPO3\FLOW3\Annotations as FLOW3;
 class Download {
 
 	/**
-	 * The filename
+	 * The label
 	 * @var string
 	 */
-	protected $filename;
+	protected $label;
 
 	/**
-	 * The url
-	 * @var string
+	 * @var \Doctrine\Common\Collections\ArrayCollection<\TYPO3\Release\Domain\Model\DownloadFormat>
+	 * @ORM\OneToMany(mappedBy="download")
 	 */
-	protected $url;
+	protected $formats;
 
 	/**
-	 * The sha1
-	 * @var string
+	 * @var \TYPO3\Release\Domain\Model\Release
+	 * @ORM\ManyToOne(inversedBy="downloads")
 	 */
-	protected $sha1;
+	protected $xrelease;
 
 	/**
-	 * Get the Download's filename
+	 * Construct
 	 *
-	 * @return string The Download's filename
+	 * @param Release $release
 	 */
-	public function getFilename() {
-		return $this->filename;
+	public function __construct(Release $release) {
+		$this->formats = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->xrelease = $release;
 	}
 
 	/**
-	 * Sets this Download's filename
-	 *
-	 * @param string $filename The Download's filename
-	 * @return void
+	 * @param string $label
 	 */
-	public function setFilename($filename) {
-		$this->filename = $filename;
+	public function setLabel($label) {
+		$this->label = $label;
 	}
 
 	/**
-	 * Get the Download's url
-	 *
-	 * @return string The Download's url
+	 * @return string
 	 */
-	public function getUrl() {
-		return $this->url;
+	public function getLabel() {
+		return $this->label;
 	}
 
 	/**
-	 * Sets this Download's url
-	 *
-	 * @param string $url The Download's url
-	 * @return void
+	 * @param DownloadFormat $format
 	 */
-	public function setUrl($url) {
-		$this->url = $url;
+	public function addFormat(DownloadFormat $format) {
+		$this->formats[] = $format;
 	}
 
 	/**
-	 * Get the Download's sha1
-	 *
-	 * @return string The Download's sha1
+	 * @return \Doctrine\Common\Collections\ArrayCollection
 	 */
-	public function getSha1() {
-		return $this->sha1;
-	}
-
-	/**
-	 * Sets this Download's sha1
-	 *
-	 * @param string $sha1 The Download's sha1
-	 * @return void
-	 */
-	public function setSha1($sha1) {
-		$this->sha1 = $sha1;
+	public function getFormats() {
+		return $this->formats;
 	}
 
 }

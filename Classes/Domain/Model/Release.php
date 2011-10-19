@@ -44,6 +44,11 @@ class Release {
 	 */
 	protected $status = self::STATUS_PLANNED;
 
+	/**
+	 * @var \Doctrine\Common\Collections\ArrayCollection<\TYPO3\Release\Domain\Model\Download>
+	 * @ORM\OneToMany(mappedBy="xrelease")
+	 */
+	protected $downloads;
 
 	/**
 	 * Construct
@@ -52,6 +57,7 @@ class Release {
 	 * @param string $version
 	 */
 	public function __construct($branch, $version) {
+		$this->downloads = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->branch = $branch;
 		$this->version = $version;
 	}
@@ -113,5 +119,18 @@ class Release {
 		$this->status = $status;
 	}
 
+	/**
+	 * @param Download $download
+	 */
+	public function addDownload(Download $download) {
+		$this->downloads[] = $download;
+	}
+
+	/**
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getDownloads() {
+		return $this->downloads;
+	}
 }
 ?>
