@@ -8,7 +8,7 @@
 			<div class="b-tabs">
 				<ul class="tabs lite-tabs">
 					<f:for each="{branches}" as="branch">
-					<li class="">{branch.label}</li>
+					<li class=""><a href="#">{branch.label}</a></li>
 					</f:for>
 				</ul>
 				<div class="tab-panes">
@@ -39,7 +39,7 @@
 									<td><strong>Supported MySQL version</strong></td>
 									<td>{branch.mysqlVersions}</td>
 								</tr>
-								<tr class="tr-even">
+								<tr class="tr-odd">
 									<td rowspan="1"><strong>Release Notes</strong></td>
 									<td rowspan="1"><a href="/download/release-notes/typo3-4-5-release-notes/">Release notes</a></td>
 								</tr>
