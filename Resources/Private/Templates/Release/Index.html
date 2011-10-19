@@ -1,0 +1,23 @@
+<f:layout name="Default" />
+
+<f:section name="Title">A list of releases</f:section>
+
+<f:section name="Content">
+	<f:if condition="{releases}">
+		<f:then>
+			<ul>
+				<f:for each="{releases}" as="release">
+					<li>
+						<f:link.action action="show" arguments="{release: release}">{release.name}</f:link.action>
+						<f:link.action action="edit" arguments="{release: release}">Edit</f:link.action>
+						<f:link.action action="delete" arguments="{release: release}">Delete</f:link.action>
+					</li>
+				</f:for>
+			</ul>
+		</f:then>
+		<f:else>
+			<p>No releases created yet.</p>
+		</f:else>
+	</f:if>
+	<p><f:link.action action="new">Create a new release</f:link.action></p>
+</f:section>
