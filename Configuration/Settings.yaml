@@ -11,9 +11,6 @@
 TYPO3:
   TYPO3CR:
     contentTypes:
-      'TYPO3.Release:DownloadsPlugin':
-        superTypes: ['TYPO3.TYPO3:Plugin']
-        label: 'Downloads'
       'TYPO3.Release:ReleasePlugin':
         superTypes: ['TYPO3.TYPO3:Plugin']
         label: 'Release'
