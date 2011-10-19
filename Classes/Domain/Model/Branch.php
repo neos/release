@@ -20,7 +20,7 @@ class Branch {
 	/**
 	 * The product
 	 * @var \TYPO3\Release\Domain\Model\Product
-	 * @ORM\ManyToOne
+	 * @ORM\ManyToOne(inversedBy="branches")
 	 */
 	protected $product;
 
@@ -48,6 +48,24 @@ class Branch {
 	 */
 	protected $gitUrl;
 
+	/**
+	 * @var \Doctrine\Common\Collections\ArrayCollection<\TYPO3\Release\Domain\Model\Release>
+	 * @ORM\OneToMany(mappedBy="branch")
+	 */
+	protected $releases;
+
+	/**
+	 * Construct
+	 *
+	 * @param Product $product
+	 * @param string $version
+	 */
+	public function __construct(Product $product, $version) {
+		$this->releases = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->product = $product;
+		$this->version = $version;
+		$this->product->addBranch($this);
+	}
 
 	/**
 	 * Get the Branch's product
@@ -56,16 +74,6 @@ class Branch {
 	 */
 	public function getProduct() {
 		return $this->product;
-	}
-
-	/**
-	 * Sets this Branch's product
-	 *
-	 * @param \TYPO3\Release\Domain\Model\Product $product The Branch's product
-	 * @return void
-	 */
-	public function setProduct(Product $product) {
-		$this->product = $product;
 	}
 
 	/**
@@ -84,16 +92,6 @@ class Branch {
 	 */
 	public function getVersion() {
 		return $this->version;
-	}
-
-	/**
-	 * Sets this Branch's version
-	 *
-	 * @param string $version The Branch's version
-	 * @return void
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
 	}
 
 	/**
@@ -151,6 +149,88 @@ class Branch {
 	 */
 	public function setGitUrl($gitUrl) {
 		$this->gitUrl = $gitUrl;
+	}
+
+	/**
+	 * Adds a release
+	 *
+	 * @param Release $release
+	 * @return void
+	 */
+	public function addRelease(Release $release) {
+		$this->releases[$release->getVersion()] = $release;
+	}
+
+	/**
+	 * Returns all releases
+	 *
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getReleases() {
+		return $this->releases;
+	}
+
+	/**
+	 * Returns a specific release
+	 *
+	 * @param $version Version number of that release, for example "1.3.4"
+	 * @return Release
+	 */
+	public function getRelease($version) {
+		/*
+			FIXME: This doesn't work due to some weird Doctrine intiialization behavior:
+		return $this->releases->containsKey($version) ? $this->releases[$version] : NULL;
+		 */
+		foreach ($this->releases as $release) {
+			if ($release->getVersion() === $version) {
+				return $release;
+			}
+		}
+		return NULL;
+	}
+
+	/**
+	 * Returns the first release
+	 *
+	 * @return Release
+	 */
+	public function getFirstRelease() {
+		$firstRelease = NULL;
+		foreach ($this->releases as $release) {
+			if (($firstRelease === NULL || version_compare($release->getVersion(), $firstRelease->getVersion(), '<')) && $release->getStatus() === Release::STATUS_RELEASED) {
+				$firstRelease = $release;
+			}
+		}
+		return $firstRelease;
+	}
+
+	/**
+	 * Returns the latest release (with the highest version number)
+	 *
+	 * @return Release
+	 */
+	public function getLatestRelease() {
+		$latestRelease = NULL;
+		foreach ($this->releases as $release) {
+			if (($latestRelease === NULL || version_compare($release->getVersion(), $latestRelease->getVersion(), '>')) && $release->getStatus() === Release::STATUS_RELEASED) {
+				$latestRelease = $release;
+			}
+		}
+		return $latestRelease;
+	}
+
+	/**
+	 * Returns the status of this branch.
+	 *
+	 * @return string
+	 */
+	public function getStatus() {
+		foreach ($this->releases as $release) {
+			if ($release->getStatus() === Release::STATUS_RELEASED) {
+				return Release::STATUS_RELEASED;
+			}
+		}
+		return Release::STATUS_PLANNED;
 	}
 
 }

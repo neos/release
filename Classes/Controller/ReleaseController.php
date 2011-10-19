@@ -12,7 +12,7 @@ use TYPO3\FLOW3\MVC\Controller\ActionController;
 use \TYPO3\Release\Domain\Model\Release;
 
 /**
- * Release controller for the TYPO3.Release package 
+ * Release controller for the TYPO3.Release package
  *
  * @FLOW3\Scope("singleton")
  */
@@ -20,17 +20,20 @@ class ReleaseController extends ActionController {
 
 	/**
 	 * @FLOW3\Inject
-	 * @var \TYPO3\Release\Domain\Repository\ReleaseRepository
+	 * @var \TYPO3\Release\Domain\Repository\ProductRepository
 	 */
-	protected $releaseRepository;
+	protected $productRepository;
 
 	/**
-	 * Shows a list of releases
+	 * Shows an overview
 	 *
 	 * @return void
 	 */
 	public function indexAction() {
-		$this->view->assign('releases', $this->releaseRepository->findAll());
+		$product = $this->productRepository->findOneByName('FLOW3');
+		if ($product !== NULL) {
+			$this->view->assign('branches', $product->getBranches());
+		}
 	}
 
 	/**

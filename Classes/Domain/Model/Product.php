@@ -26,7 +26,7 @@ class Product {
 	protected $name;
 
 	/**
-	 * @var \Doctrine\Common\Collections\ArrayCollection<\TYPO3\Release\Domain\Model\Branch>
+	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Release\Domain\Model\Branch>
 	 * @ORM\OneToMany(mappedBy="product")
 	 */
 	protected $branches;
@@ -64,7 +64,7 @@ class Product {
 	 * @return void
 	 */
 	public function addBranch(Branch $branch) {
-		$this->branches->add($branch);
+		$this->branches[$branch->getVersion()] = $branch;
 	}
 
 	/**
@@ -76,5 +76,23 @@ class Product {
 		return $this->branches;
 	}
 
+	/**
+	 * Returns a specific branch
+	 *
+	 * @param $version Version number of that branch, for example "1.3"
+	 * @return Branch
+	 */
+	public function getBranch($version) {
+		/*
+			FIXME: This doesn't work due to some weird Doctrine intiialization behavior:
+		return $this->branches->containsKey($version) ? $this->branches[$version] : NULL;
+		 */
+		foreach ($this->branches as $branch) {
+			if ($branch->getVersion() === $version) {
+				return $branch;
+			}
+		}
+		return NULL;
+	}
 }
 ?>

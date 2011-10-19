@@ -17,6 +17,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Release {
 
+	const STATUS_PLANNED = 'planned';
+	const STATUS_RELEASED = 'released';
+
+	/**
+	 * @var \TYPO3\Release\Domain\Model\Branch
+	 * @ORM\ManyToOne(inversedBy="releases")
+	 */
+	protected $branch;
+
 	/**
 	 * The version
 	 * @var string
@@ -31,9 +40,21 @@ class Release {
 
 	/**
 	 * The status
-	 * @var integer
+	 * @var string
 	 */
-	protected $status;
+	protected $status = self::STATUS_PLANNED;
+
+
+	/**
+	 * Construct
+	 *
+	 * @param Product $product
+	 * @param string $version
+	 */
+	public function __construct($branch, $version) {
+		$this->branch = $branch;
+		$this->version = $version;
+	}
 
 	/**
 	 * Get the Release's version

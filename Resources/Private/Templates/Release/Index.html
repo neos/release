@@ -1,23 +1,88 @@
 <f:layout name="Default" />
 
-<f:section name="Title">A list of releases</f:section>
+<f:section name="Title">Release Overview</f:section>
 
 <f:section name="Content">
-	<f:if condition="{releases}">
+	<f:if condition="{branches}">
 		<f:then>
-			<ul>
-				<f:for each="{releases}" as="release">
-					<li>
-						<f:link.action action="show" arguments="{release: release}">{release.name}</f:link.action>
-						<f:link.action action="edit" arguments="{release: release}">Edit</f:link.action>
-						<f:link.action action="delete" arguments="{release: release}">Delete</f:link.action>
-					</li>
-				</f:for>
-			</ul>
+			<div class="b-tabs">
+				<ul class="tabs lite-tabs">
+					<f:for each="{branches}" as="branch">
+					<li class="">{branch.label}</li>
+					</f:for>
+				</ul>
+				<div class="tab-panes">
+					<f:for each="{branches}" as="branch">
+						<div class="tab-content lite-tab-panes-black">
+							<table class="featured">
+								<tbody>
+								<tr class="tr-even">
+									<td><strong>Status</strong></td>
+									<td>{branch.status}</td>
+								</tr>
+								<f:if condition="{branch.firstRelease}">
+								<tr class="tr-odd">
+									<td><strong>Release Date</strong></td>
+									<td><f:format.date format="d.m.Y">{branch.firstRelease.date}</f:format.date></td>
+								</tr>
+								<tr class="tr-even">
+									<td><strong>Latest Version</strong></td>
+									<td>
+										{branch.latestRelease.version} (<f:format.date format="d.m.Y">{branch.latestRelease.date}</f:format.date>)
+									</td>
+								</tr>
+								<tr class="tr-odd">
+									<td><strong>Suported PHP Version</strong></td>
+									<td>{branch.phpVersions}</td>
+								</tr>
+								<tr class="tr-even">
+									<td><strong>Supported MySQL version</strong></td>
+									<td>{branch.mysqlVersions}</td>
+								</tr>
+								<tr class="tr-even">
+									<td rowspan="1"><strong>Release Notes</strong></td>
+									<td rowspan="1"><a href="/download/release-notes/typo3-4-5-release-notes/">Release notes</a></td>
+								</tr>
+								<tr class="tr-even">
+									<td><strong>Installation</strong></td>
+									<td><a href="/documentation/document-library/installation/">Installation instructions</a></td>
+								</tr>
+								</f:if>
+								<tr class="tr-odd">
+									<td><strong>GIT repository</strong></td>
+									<td><a href="{branch.gitUrl}" target="_blank">Git location</a></td>
+								</tr>
+								</tbody>
+							</table>
+							<h4>{branch.label} Downloads</h4>
+							<f:if condition="{branch.releases}">
+								<f:then>
+									<table class="featured">
+										<tbody>
+										<f:for each="{branch.downloads}" as="download">
+										<tr class="tr-even">
+											<td>{download.label}</td>
+											<td><f:for each="{download.variants}" as="variant"><a href="{variant.url}" target="_blank" class="bu">[{variant.format}]</a>&nbsp;</f:for></td>
+										</tr>
+										</f:for>
+										</tbody>
+									</table>
+									<ul>
+									<f:for each="{branch.releases}" as="release">
+									</f:for>
+									</ul>
+								</f:then>
+								<f:else>
+									<p>There are no downloads available for this release yet.</p>
+								</f:else>
+							</f:if>
+						</div> <!-- tab-content -->
+					</f:for>
+				</div> <!-- tab-panes -->
+			</div> <!-- b-tabs -->
 		</f:then>
 		<f:else>
-			<p>No releases created yet.</p>
+			<p>No branches configured yet.</p>
 		</f:else>
 	</f:if>
-	<p><f:link.action action="new">Create a new release</f:link.action></p>
 </f:section>
