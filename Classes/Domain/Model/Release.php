@@ -45,6 +45,12 @@ class Release {
 	protected $status = self::STATUS_PLANNED;
 
 	/**
+	 * The ChangeLog URI
+	 * @var string
+	 */
+	protected $changeLogUri;
+
+	/**
 	 * @var \Doctrine\Common\Collections\ArrayCollection<\TYPO3\Release\Domain\Model\Download>
 	 * @ORM\OneToMany(mappedBy="xrelease")
 	 */
@@ -69,6 +75,25 @@ class Release {
 	 */
 	public function getVersion() {
 		return $this->version;
+	}
+
+	/**
+	 * Get the ChangeLog URI for this version
+	 *
+	 * @return string
+	 */
+	public function getChangeLogUri() {
+		return $this->changeLogUri;
+	}
+
+	/**
+	 * Set the ChangeLog URI for this version
+	 *
+	 * @param string $changeLogUri
+	 * @return void
+	 */
+	public function setChangeLogUri($changeLogUri) {
+		$this->changeLogUri = $changeLogUri;
 	}
 
 	/**

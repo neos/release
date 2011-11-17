@@ -113,9 +113,10 @@ class ReleaseCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandContro
 	 *
 	 * @param string $productName The product name
 	 * @param string $version The release version, for example "1.3.4"
+	 * @param string $changeLogUri The URI of the ChangeLog for this release
 	 * @return void
 	 */
-	public function releaseCommand($productName, $version) {
+	public function releaseCommand($productName, $version, $changeLogUri) {
 		$product = $this->productRepository->findOneByName($productName);
 		if ($product === NULL) {
 			$this->outputLine('Product "%s" does not exist.', array($productName));
@@ -136,6 +137,7 @@ class ReleaseCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandContro
 
 		$release->setDate(new \DateTime());
 		$release->setStatus(Release::STATUS_RELEASED);
+		$release->setChangeLogUri($changeLogUri);
 
 		$this->productRepository->update($product);
 

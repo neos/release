@@ -58,7 +58,10 @@
 										<tbody>
 										<f:for each="{branch.latestRelease.downloads}" as="download">
 										<tr class="tr-even">
-											<td>{download.label}</td>
+											<td>
+												{download.label} ({branch.latestRelease.version})<f:if condition="{branch.latestRelease.changeLogUri}"><br />
+												<a href="{branch.latestRelease.changeLogUri}">Change Log</a></f:if>
+											</td>
 											<td><f:for each="{download.formats}" as="format"><a href="{format.url}" target="_blank" class="bu">[{format.fileExtension}]</a>&nbsp;</f:for></td>
 										</tr>
 										</f:for>
