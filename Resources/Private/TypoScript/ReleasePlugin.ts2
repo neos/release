@@ -1,0 +1,6 @@
+prototype(TYPO3.Release:ReleasePlugin) < prototype(TYPO3.TYPO3:PluginRenderer)
+prototype(TYPO3.Release:ReleasePlugin) {
+	package = 'TYPO3.Release'
+	controller = 'Release'
+	action = 'index'
+}
