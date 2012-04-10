@@ -7,7 +7,7 @@ namespace TYPO3\Release\Controller;
  *                                                                        */
 
 use TYPO3\FLOW3\Annotations as FLOW3;
-use TYPO3\FLOW3\MVC\Controller\ActionController;
+use TYPO3\FLOW3\Mvc\Controller\ActionController;
 
 /**
  * Release controller for the TYPO3.Release package

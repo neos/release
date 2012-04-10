@@ -18,7 +18,7 @@ use TYPO3\Release\Domain\Model\DownloadFormat;
  *
  * @FLOW3\Scope("singleton")
  */
-class ReleaseCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandController {
+class ReleaseCommandController extends \TYPO3\FLOW3\Cli\CommandController {
 
 	/**
 	 * @FLOW3\Inject
