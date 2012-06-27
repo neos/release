@@ -28,7 +28,7 @@ class ReleaseController extends ActionController {
 	 * @return void
 	 */
 	public function indexAction() {
-		$product = $this->productRepository->findOneByName('FLOW3');
+		$product = $this->productRepository->findOneByName($this->settings['productName']);
 		if ($product !== NULL) {
 			$this->view->assign('branches', $product->getBranches());
 		}
