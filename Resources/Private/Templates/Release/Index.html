@@ -40,10 +40,12 @@
 									<td><strong>Supported MySQL version</strong></td>
 									<td>{branch.mysqlVersions}</td>
 								</tr>
+								<f:if condition="{branch.releaseNotesUrl}">
 								<tr class="tr-odd">
 									<td rowspan="1"><strong>Release Notes</strong></td>
-									<td rowspan="1"><a href="{branch.latestRelease.changeLogUri}">Release Notes</a></td>
+									<td rowspan="1"><a href="{branch.releaseNotesUrl}">Release Notes</a></td>
 								</tr>
+								</f:if>
 								</f:if>
 								<tr class="tr-even">
 									<td><strong>GIT repository</strong></td>

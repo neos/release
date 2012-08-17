@@ -49,6 +49,12 @@ class Branch {
 	protected $gitUrl;
 
 	/**
+	 * The branch release notes url
+	 * @var string
+	 */
+	protected $releaseNotesUrl;
+
+	/**
 	 * @var \Doctrine\Common\Collections\ArrayCollection<\TYPO3\Release\Domain\Model\Release>
 	 * @ORM\OneToMany(mappedBy="branch")
 	 */
@@ -152,6 +158,25 @@ class Branch {
 	}
 
 	/**
+	 * Get the Branch's git url
+	 *
+	 * @return string The Branch's release notes url
+	 */
+	public function getReleaseNotesUrl() {
+		return $this->releaseNotesUrl;
+	}
+
+	/**
+	 * Sets this Branch's git url
+	 *
+	 * @param string $releaseNotesUrl The Branch's release notes url
+	 * @return void
+	 */
+	public function setReleaseNotesUrl($releaseNotesUrl) {
+		$this->releaseNotesUrl = $releaseNotesUrl;
+	}
+
+	/**
 	 * Adds a release
 	 *
 	 * @param Release $release
@@ -178,7 +203,7 @@ class Branch {
 	 */
 	public function getRelease($version) {
 		/*
-			FIXME: This doesn't work due to some weird Doctrine intiialization behavior:
+			FIXME: This doesn't work due to some weird Doctrine initialization behavior:
 		return $this->releases->containsKey($version) ? $this->releases[$version] : NULL;
 		 */
 		foreach ($this->releases as $release) {
