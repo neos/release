@@ -35,6 +35,7 @@ class Release {
 	/**
 	 * The date
 	 * @var \DateTime
+	 * @ORM\Column(nullable=true)
 	 */
 	protected $date;
 
@@ -47,6 +48,7 @@ class Release {
 	/**
 	 * The ChangeLog URI
 	 * @var string
+	 * @ORM\Column(nullable=true)
 	 */
 	protected $changeLogUri;
 
