@@ -14,5 +14,5 @@ TYPO3:
   TYPO3CR:
     contentTypes:
       'TYPO3.Release:ReleasePlugin':
-        superTypes: ['TYPO3.TYPO3:Plugin']
+        superTypes: ['TYPO3.Phoenix.ContentTypes:Plugin']
         label: 'Release'
