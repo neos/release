@@ -6,18 +6,18 @@ namespace TYPO3\Release\Controller;
  *                                                                        *
  *                                                                        */
 
-use TYPO3\FLOW3\Annotations as FLOW3;
-use TYPO3\FLOW3\Mvc\Controller\ActionController;
+use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Mvc\Controller\ActionController;
 
 /**
  * Release controller for the TYPO3.Release package
  *
- * @FLOW3\Scope("singleton")
+ * @Flow\Scope("singleton")
  */
 class ReleaseController extends ActionController {
 
 	/**
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 * @var \TYPO3\Release\Domain\Repository\ProductRepository
 	 */
 	protected $productRepository;

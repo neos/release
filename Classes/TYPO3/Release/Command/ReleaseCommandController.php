@@ -6,7 +6,7 @@ namespace TYPO3\Release\Command;
  *                                                                        *
  *                                                                        */
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Release\Domain\Model\Product;
 use TYPO3\Release\Domain\Model\Branch;
 use TYPO3\Release\Domain\Model\Release;
@@ -16,12 +16,12 @@ use TYPO3\Release\Domain\Model\DownloadFormat;
 /**
  * Branch command controller for the TYPO3.Release package
  *
- * @FLOW3\Scope("singleton")
+ * @Flow\Scope("singleton")
  */
-class ReleaseCommandController extends \TYPO3\FLOW3\Cli\CommandController {
+class ReleaseCommandController extends \TYPO3\Flow\Cli\CommandController {
 
 	/**
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 * @var \TYPO3\Release\Domain\Repository\ProductRepository
 	 */
 	protected $productRepository;

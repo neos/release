@@ -6,22 +6,22 @@ namespace TYPO3\Release\Domain\Model;
  *                                                                        *
  *                                                                        */
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * A Product
  *
- * @FLOW3\Scope("prototype")
- * @FLOW3\Entity
+ * @Flow\Scope("prototype")
+ * @Flow\Entity
  */
 class Product {
 
 	/**
 	 * The name
 	 * @var string
-	 * @FLOW3\Validate(type="StringLength", options={ "minimum"=3, "maximum"=255 })
+	 * @Flow\Validate(type="StringLength", options={ "minimum"=3, "maximum"=255 })
 	 */
 	protected $name;
 
