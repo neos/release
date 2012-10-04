@@ -1,9 +1,9 @@
 {
-  "name": "typo3\/release",
-  "type": "flow3-plugin",
+  "name": "typo3/release",
+  "type": "typo3-flow-plugin",
   "description": "Release plugin for phoenix.typo3.org site",
   "require": {
-    "typo3/flow3": "*"
+    "typo3/flow": "*"
   },
   "autoload": {
     "psr-0": {
