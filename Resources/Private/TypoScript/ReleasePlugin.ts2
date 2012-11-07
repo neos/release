@@ -1,4 +1,4 @@
-prototype(TYPO3.Release:ReleasePlugin) < prototype(TYPO3.Phoenix.ContentTypes:Plugin)
+prototype(TYPO3.Release:ReleasePlugin) < prototype(TYPO3.Neos.ContentTypes:Plugin)
 prototype(TYPO3.Release:ReleasePlugin) {
 	package = 'TYPO3.Release'
 	controller = 'Release'
