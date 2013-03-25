@@ -11,8 +11,3 @@
 TYPO3:
   Release:
     productName: 'FLOW3'
-  TYPO3CR:
-    contentTypes:
-      'TYPO3.Release:ReleasePlugin':
-        superTypes: ['TYPO3.Neos.ContentTypes:Plugin']
-        label: 'Release'
