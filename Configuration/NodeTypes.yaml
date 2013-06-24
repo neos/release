@@ -1,5 +1,6 @@
+
 'TYPO3.Release:ReleasePlugin':
   superTypes:
     - 'TYPO3.Neos:Plugin'
   ui:
-    label: 'Release'
+    label: Release
