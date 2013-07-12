@@ -28,7 +28,7 @@ class Product {
 	/**
 	 * @var \Doctrine\Common\Collections\Collection<\TYPO3\Release\Domain\Model\Branch>
 	 * @ORM\OneToMany(mappedBy="product")
-	 * @ORM\OrderBy({"version" = "ASC"})
+	 * @ORM\OrderBy({"version" = "DESC"})
 	 */
 	protected $branches;
 
