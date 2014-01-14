@@ -1,0 +1,12 @@
+#                                                                        #
+# Security policy for the TYPO3.Release package                          #
+#                                                                        #
+
+resources:
+  methods:
+    TYPO3_Release_ViewReleases: 'method(TYPO3\Release\Controller\ReleaseController->indexAction())'
+
+acls:
+  Everybody:
+    methods:
+      TYPO3_Release_ViewReleases: GRANT
