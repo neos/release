@@ -2,11 +2,13 @@
 # Security policy for the TYPO3.Release package                          #
 #                                                                        #
 
-resources:
-  methods:
-    TYPO3_Release_ViewReleases: 'method(TYPO3\Release\Controller\ReleaseController->indexAction())'
-
-acls:
-  Everybody:
-    methods:
-      TYPO3_Release_ViewReleases: GRANT
+privilegeTargets:
+  TYPO3\Flow\Security\Authorization\Privilege\Method\MethodPrivilege:
+    TYPO3_Release_ViewReleases:
+      matcher: method(TYPO3\Release\Controller\ReleaseController->indexAction())
+roles:
+  'TYPO3.Flow:Everybody':
+    privileges:
+      -
+        privilegeTarget: TYPO3_Release_ViewReleases
+        permission: GRANT
